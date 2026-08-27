@@ -10,12 +10,19 @@ if(!empty($_POST)){
     $sql = "INSERT INTO category (name) VALUES ('$name')";
     $result = mysqli_query($conn, $sql);
     if($result){
-        echo "Category added successfully";
+        $_SESSION['success'] = "Category added successfully";
+        header('Location: category.php');
     }else{
-        echo "Error: category not added "; 
+        $_SESSION['error'] = "Error: category not added "; 
+        header('Location: category.php');
     }
 }
+
+$query="SELECT * FROM category";
+$cat=mysqli_query($conn,$query);
 ?>
+
+
 
 
 <h1>category</h1>
@@ -24,8 +31,26 @@ if(!empty($_POST)){
     <button>Add Category</button>
 </form>
 
+<table border="1" width="100%">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+</tr>
+<?php while($row = mysqli_fetch_assoc($cat)): ?>
+    <tr>
+        <td><?php echo $row['cid']; ?></td>
+        <td><?php echo $row['name']; ?></td>
+
+    </tr>
+    <?php endwhile; ?>
+
+</table>
+
+
 
 
 <?php
 require_once 'footer.php';
 ?>
+
+
