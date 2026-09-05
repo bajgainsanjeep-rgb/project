@@ -2,12 +2,24 @@
 require_once 'header.php';
 require_once 'connection.php';
 
+if(!empty($_GET['search'])){
+    $search = $_GET['search'];
+    $sql="SELECT * FROM products WHERE title LIKE '%$search%'";
+    $result=mysqli_query($conn,$sql);
+}else{
+
 $sql="SELECT * FROM products";
 $result=mysqli_query($conn,$sql);
+}
 ?>
 
 
 <h1>product list </h1>
+
+
+<form action="">
+    Search: <input type="text" name="search" id="search"> <button>Search</button>
+</form>
 
 <ul>
     <?php while($row = mysqli_fetch_assoc($result)): ?>

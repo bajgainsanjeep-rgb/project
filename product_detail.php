@@ -23,3 +23,6 @@ $product = mysqli_fetch_assoc($result);
 </p>
 <p>Price: $<?php echo $product['price']; ?></p>
 <p>Description: <?php echo $product['description']; ?></p>
+
+
+<a href="orders.php?product_id=<?php echo $product['pid']; ?>">Order Now</a>
